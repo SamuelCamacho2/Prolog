@@ -7,20 +7,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def graficar(negativo, neutal, positivo):
-    etiquetas = ['negativo','neutal','positivo']
-    valores = [negativo,neutal,positivo]
-    
-    co = np.arange(len(valores))
-    an = 0.30
-    
-    fig, ax = plt.subplots()
-    ax.bar(co, valores, an)
-    
-    ax.set_title('Grafica de emociones')
-    ax.set_ylabel('Rank')
-    ax.set_xticks(co)
-    ax.set_xticklabels(etiquetas)
+def graficar(negativo, neutral, positivo,dividir):
+    categorias = ['Felicidad', 'Neutral', 'Triste']
+    neutral= neutral/dividir
+    positivo=positivo/dividir
+    negativo=negativo/dividir
+    valores = [negativo, neutral, positivo]  # Valores de las barras correspondientes a cada categoría
+
+    plt.bar(categorias, valores, color=['green', 'gray', 'blue'])
+
+    plt.xlabel('Categorías')
+    plt.ylabel('Cantidad')
+    plt.title('Gráfico de Barras')
+
+    plt.show()
 
 def archivo(busq,limite):
     query = busq
@@ -100,12 +100,10 @@ def leer_archivo_csv(ruta_archivo):
                 print(l,s)
             print()
             print(negativo, neutral, positivo)
-    
-    print(negativo/dividir, neutral/dividir, positivo/dividir)
+    graficar(negativo,neutral,positivo,dividir)
 
 
-graficar(10, 12, 5)
 
-# archivo('Popocatépetl', 5)
-# ruta_archivo_csv = 'Tweets2.csv'
-# leer_archivo_csv(ruta_archivo_csv)
+archivo('Popocatépetl', 5)
+ruta_archivo_csv = 'Tweets2.csv'
+leer_archivo_csv(ruta_archivo_csv)
